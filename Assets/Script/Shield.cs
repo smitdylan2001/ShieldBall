@@ -7,6 +7,7 @@ public class Shield : MonoBehaviour
     [SerializeField] private GameObject _shieldGO;
     [SerializeField] private GameObject _rightHand;
     [SerializeField] private GameObject _leftHand;
+
     private Ball _ballScript;
 
     public float _handsDistance { get; private set; }
@@ -17,10 +18,10 @@ public class Shield : MonoBehaviour
     public GameObject OnInitialize(Ball ball)
     {
         _ballScript = ball;
+
         //_shieldGO = Resources.Load<GameObject>("Shield.prefab"); //TODO: Implement prefab in resources
 
         //_shieldGO.AddComponent<this>();
-
         return _shieldGO;
     }
 
@@ -47,7 +48,8 @@ public class Shield : MonoBehaviour
 		if(collision.gameObject.CompareTag("Ball"))
         {
             //_ballScript.GetBounced(_handsDistance, _shieldGO.transform.forward);
-            EventManager<Shield>.InvokeEvent(EventType.ON_POINTS_UPDATE, this);
+            EventManager<Shield>.InvokeEvent(EventType.ON_BALL_HIT, this);
+            EventManager.InvokeEvent(EventType.ON_BALL_HIT);
         }
 	}
 }

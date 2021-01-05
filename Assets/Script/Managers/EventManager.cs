@@ -5,7 +5,9 @@
 /// </summary>
 public enum EventType // EventType overwrites UnityEngine.EventType
 {
-	ON_POINTS_UPDATE = 0
+	ON_POINTS_UPDATE = 0,
+	ON_BALL_HIT = 1,
+	ON_TARGET_HIT = 2
 }
 /// <summary>
 /// The manager that handles all the events without generic (Such as game start and end)

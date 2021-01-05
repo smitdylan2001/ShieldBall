@@ -7,21 +7,22 @@ public class GameManager : MonoBehaviour
     private ScoreManager _scoreManager;
     private Shield _shieldScript;
     private Ball _ballScript;
-    GameObject shield;
+    private GameObject _player;
+    GameObject _shield;
     [SerializeField] GameObject _startPoint;
 
     void Awake()
     {
         _shieldScript = GameObject.FindGameObjectWithTag("Shield").GetComponent<Shield>();
-        _ballScript = new Ball();
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _ballScript = GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>();
         _scoreManager = new ScoreManager();
 
         _scoreManager.OnInitialize();
-        shield = _shieldScript.OnInitialize(_ballScript);
-        _ballScript.OnInitialize(shield);
+        _shield = _shieldScript.OnInitialize(_ballScript);
+        _ballScript.OnInitialize(_shield, _player);
     }
 
-    // Update is called once per frame
     void Update()
     {
         
