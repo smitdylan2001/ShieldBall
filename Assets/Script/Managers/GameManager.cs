@@ -10,9 +10,14 @@ public class GameManager : MonoBehaviour
     private GameObject _player;
     GameObject _shield;
     [SerializeField] GameObject _startPoint;
+    public static float ReturnSpeed;
+    public static float BallSpeed;
 
     void Awake()
     {
+        ReturnSpeed = 0.1f;
+        BallSpeed = 18;
+
         _shieldScript = GameObject.FindGameObjectWithTag("Shield").GetComponent<Shield>();
         _player = GameObject.FindGameObjectWithTag("Player");
         _ballScript = GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>();
