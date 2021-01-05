@@ -30,7 +30,7 @@ public class Shield : MonoBehaviour
         _shieldGO.transform.position = _leftHand.transform.position;
         _shieldGO.transform.LookAt(_rightHand.transform);
         float value = (_leftHand.transform.rotation.eulerAngles.x + _rightHand.transform.rotation.eulerAngles.x) / 2;
-        Debug.Log(value);
+        //Debug.Log(value);
         Quaternion q = Quaternion.Euler(_shieldGO.transform.rotation.eulerAngles.x + 90 - value, _shieldGO.transform.rotation.eulerAngles.y + 90, _shieldGO.transform.rotation.eulerAngles.z);
         _shieldGO.transform.rotation = q;
 

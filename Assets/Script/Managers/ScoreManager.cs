@@ -8,7 +8,8 @@ public class ScoreManager
     private int _score;
     private int _multiplier;
     private TMP_Text _scoreText;
-    
+
+    public ScoreManager() { }
 
     public void OnInitialize()
     {
