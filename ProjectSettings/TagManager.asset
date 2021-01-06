@@ -9,6 +9,7 @@ TagManager:
   - Hand
   - Ball
   - ScoreText
+  - DeadTarget
   layers:
   - Default
   - TransparentFX

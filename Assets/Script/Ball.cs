@@ -15,6 +15,8 @@ public class Ball : MonoBehaviour
     private Vector3 _endPos;
     private float _startTime;
     private Vector3 _velocityCache;
+    private Color _white = new Color(1, 1, 1, 1);
+    private Color _red = new Color(1, 0, 0, 1);
 
     public void OnInitialize(GameObject shield, GameObject player)
     {
@@ -59,17 +61,32 @@ public class Ball : MonoBehaviour
 	{
 		if (collision.gameObject.CompareTag("Target"))
 		{
-
             EventManager<float>.InvokeEvent(EventType.ON_POINTS_UPDATE, GameManager.BallSpeed);
-            collision.gameObject.GetComponent<MeshRenderer>().material.color = new Color(1, 1, 1, 1);
+
+            Material mat = collision.gameObject.GetComponent<MeshRenderer>().material;
+            mat.color = _white;
             Vector3 v = _shield.transform.position; // + (_shield.transform.up / 5);
             StartCoroutine( ReturnBallToPlayer(v));
-		}
-	}
+            StartCoroutine(ReactivateTarget(mat, collision.gameObject));
+            collision.gameObject.tag = "DeadTarget";
+        } 
+        else if (collision.gameObject.CompareTag("DeadTarget"))
+		{
+            Vector3 v = _shield.transform.position; 
+            StartCoroutine(ReturnBallToPlayer(v));
+        }
+    }
 
     private void DisableIsReturning()
 	{
         _IsReturning = false;
+	}
+
+    IEnumerator ReactivateTarget(Material mat,GameObject go)
+	{
+        yield return new WaitForSeconds(5f);
+        mat.color = _red;
+        go.tag = "Target";
 	}
 
     IEnumerator ReturnBallToPlayer(Vector3 v3)

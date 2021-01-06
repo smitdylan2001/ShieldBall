@@ -5,7 +5,7 @@ using TMPro;
 
 public class ScoreManager
 {
-    private int _score;
+    static public float _score;
     private int _multiplier;
     private TMP_Text _scoreText;
 
@@ -21,9 +21,8 @@ public class ScoreManager
 
     private void AddScore(float score)
 	{
-        Debug.Log("Scoring");
-        _score += (int)score;
+        _score += score;
         
-        _scoreText.text = "Score: " + _score.ToString();
+        _scoreText.text = "Score: " + ((int)_score).ToString();
 	}
 }

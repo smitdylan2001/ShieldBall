@@ -15,28 +15,25 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        ReturnSpeed = 0.1f;
-        BallSpeed = 18;
+        ReturnSpeed = 0.075f;
+        BallSpeed = 10;
 
         _shieldScript = GameObject.FindGameObjectWithTag("Shield").GetComponent<Shield>();
         _player = GameObject.FindGameObjectWithTag("Player");
         _ballScript = GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>();
-        _scoreManager = new ScoreManager();
+        _scoreManager = new ScoreManager(); 
 
         _scoreManager.OnInitialize();
         _shield = _shieldScript.OnInitialize(_ballScript);
         _ballScript.OnInitialize(_shield, _player);
     }
 
-    void Update()
-    {
-        
-    }
-
 	private void FixedUpdate()
 	{
         _ballScript.onFixedUpdate();
-	}
+        ReturnSpeed = 0.075f + ((ScoreManager._score / 10000) * 1.8f);
+        BallSpeed = 12 + ((ScoreManager._score / 100) *3);
+    }
 
     public void GetStarted()
 	{
